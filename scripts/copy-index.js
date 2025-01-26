@@ -14,7 +14,7 @@ try {
     const updatedContent = indexContent
         .replace(
             '<meta name="viewport"',
-            '<base href="/get_lit_test/"><meta name="viewport"'
+            '<base href="/made-with/"><meta name="viewport"'
         )
         .replace(
             '<script type="module" src="./src/my-app.ts"></script>',

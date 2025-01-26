@@ -1,41 +1,59 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { LitElement, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
+
+import '../components/made-with-title';
+import '../components/get-sheep';
 
 @customElement('home-page')
 export class HomePage extends LitElement {
-    static styles = css`
-        :host {
-            display: block;
-            padding: 1rem;
-        }
-        h1 {
-            color: #333;
-        }
-    `;
+  @property() 
+  data?: any;
 
-    constructor() {
-        super();
-        console.log('HomePage component constructed');
-    }
+  @property() 
+  sheepArr?: string[];
 
-    connectedCallback() {
-        super.connectedCallback();
-        console.log('HomePage connected to DOM');
-    }
 
-    render() {
-        console.log('HomePage rendering');
-        return html`
-            <div class="home-content">
-                <h1>Welcome Home</h1>
-                <p>This is the home page of our LitElement website.</p>
-            </div>
+  constructor() {
+    super();
+    this.fetchData();
+  }
+
+  async fetchData() {
+
+    let url = 'https://api.sheety.co/7ad3efa7402795a0f6d5c438fa02730d/britishSheep/sheep';
+
+    fetch(url)
+        .then((response) => response.json())
+        .then(json => {
+            this.data = json.sheep;
+            this.sheepArr = json.sheep.map((i: any) => (i.name));
+            this.requestUpdate();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+  }
+
+    get sheepTable() {
+
+        if (!this.data) {
+            return html`
+                <h4>🐑🐑🐑</h4>
+            `;
+        } else {
+            return html`
+            <get-sheep .allData=${this.data}></get-sheep>
         `;
+        }
     }
-}
 
-declare global {
-    interface HTMLElementTagNameMap {
-        'home-page': HomePage;
-    }
+  override render() {
+    return html`
+      <main>
+        <made-with-title .sheepArr=${this.sheepArr}></made-with-title>
+        <about-page></about-page>
+        ${this.sheepTable}
+      </main>
+    `;
+  }
 }

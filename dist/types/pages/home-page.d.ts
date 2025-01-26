@@ -1,13 +1,12 @@
 import { LitElement } from 'lit';
+import '../components/made-with-title';
+import '../components/get-sheep';
 export declare class HomePage extends LitElement {
-    static styles: import("lit").CSSResult;
+    data?: any;
+    sheepArr?: string[];
     constructor();
-    connectedCallback(): void;
+    fetchData(): Promise<void>;
+    get sheepTable(): import("lit-html").TemplateResult<1>;
     render(): import("lit-html").TemplateResult<1>;
-}
-declare global {
-    interface HTMLElementTagNameMap {
-        'home-page': HomePage;
-    }
 }
 //# sourceMappingURL=home-page.d.ts.map

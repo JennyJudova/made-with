@@ -2937,37 +2937,25 @@ let MyApp = class MyApp extends s {
         this.router = new Router(outlet);
         // Get base URL from base tag if it exists, otherwise use '/'
         const baseUrl = ((_b = document.querySelector('base')) === null || _b === void 0 ? void 0 : _b.href) || '/';
-        console.log('Base URL:', baseUrl); // Debug log
         // Configure router
         this.router.setRoutes([
             {
                 path: '/',
                 component: 'home-page',
-                action: () => { console.log('Navigating to home page'); }
             },
             {
                 path: '/about',
                 component: 'about-page',
-                action: () => { console.log('Navigating to about page'); }
             },
             {
                 path: '/contact',
                 component: 'contact-page',
-                action: () => { console.log('Navigating to contact page'); }
             },
             {
                 path: '(.*)',
                 redirect: '/',
-                action: () => { console.log('Redirecting to home page'); }
             }
         ]);
-        if (this.router.ready) {
-            console.log('Router is ready');
-        }
-        else {
-            console.log('Router is not ready');
-        }
-        // Set base URL for router
         this.router.baseUrl = baseUrl;
     }
     render() {
