@@ -48,7 +48,6 @@ tbody td {
   
   table {
     width: 90%;
-    margin: 0 5%;
     text-align: left;
   }
   th, td {

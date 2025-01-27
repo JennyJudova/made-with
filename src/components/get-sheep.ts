@@ -1,6 +1,7 @@
 import {customElement, property} from 'lit/decorators.js';
 import { LitElement, html } from 'lit';
 import { styles } from './style/get-sheep.css.ts';
+import './image-tooltip';
 
 @customElement('get-sheep')
 export class GetSheep extends LitElement {
@@ -24,15 +25,13 @@ constructor() {
   }
 
 render() {
-    // ${until(this.sheep, html`<span>Loading...</span>`)}
-    console.log('this.data 2', this.allData)
-
     return html`
     <table class="sheep-table">
         <tbody>
         ${this.sheepData.map((i: any) => html`
         <tr onclick="window.location.href='/sheep/${i.id}'">
             ${Object.keys(i).filter((key) => key !== 'img').map((key) => html`<td>${i[key]}</td>`)}
+            <image-tooltip><img src=${i.img} alt=${i.name} width="300"></image-tooltip>
         </tr>
         `)}
         </tbody>

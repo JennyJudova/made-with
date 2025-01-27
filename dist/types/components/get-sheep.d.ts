@@ -1,4 +1,5 @@
 import { LitElement } from 'lit';
+import './image-tooltip';
 export declare class GetSheep extends LitElement {
     static styles: any[];
     allData: any;

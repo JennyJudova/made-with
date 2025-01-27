@@ -11,7 +11,7 @@ let MadeWithTitle = class MadeWithTitle extends s {
     constructor() {
         super();
         this.count = 0;
-        this.sheep = 'Sheep';
+        this.sheep = 'Wool';
         this.sheepArr = this.getAttribute("sheepArr");
         this.setTitle();
     }
@@ -105,7 +105,6 @@ tbody td {
   
   table {
     width: 90%;
-    margin: 0 5%;
     text-align: left;
   }
   th, td {
@@ -123,6 +122,70 @@ tbody td {
   }
 `;
 
+// Events to turn on/off the tooltip
+const enterEvents = ['pointerenter', 'focus'];
+const leaveEvents = ['pointerleave', 'blur', 'keydown', 'click'];
+let ImageTooltip = class ImageTooltip extends s {
+    constructor() {
+        super(...arguments);
+        // Position offset
+        this.offset = 4;
+        this._target = null;
+        this.show = () => {
+            this.style.cssText = '';
+            // Position the tooltip near the target.
+            const { x, y, height } = this.target.getBoundingClientRect();
+            this.style.left = `${x}px`;
+            this.style.top = `${y + height + this.offset}px`;
+        };
+        this.hide = () => {
+            this.style.display = 'none';
+        };
+    }
+    get target() {
+        return this._target;
+    }
+    set target(target) {
+        // Remove events from existing target
+        if (this.target) {
+            enterEvents.forEach(name => this.target.removeEventListener(name, this.show));
+            leaveEvents.forEach(name => this.target.removeEventListener(name, this.hide));
+        }
+        // Add events to new target
+        if (target) {
+            enterEvents.forEach(name => target.addEventListener(name, this.show));
+            leaveEvents.forEach(name => target.addEventListener(name, this.hide));
+        }
+        this._target = target;
+    }
+    connectedCallback() {
+        var _a;
+        super.connectedCallback();
+        this.hide();
+        (_a = this.target) !== null && _a !== void 0 ? _a : (this.target = this.previousElementSibling);
+    }
+    render() {
+        return x `<slot></slot>`;
+    }
+};
+ImageTooltip.styles = i$1 `
+    :host {
+      display: flex;
+      position: fixed;
+      z-index: 1;
+      padding: 4px;
+      border: rgba(196,126,16,1);
+      background: rgba(196,126,16,1);
+      pointer-events: none;
+    }
+  `;
+__decorate([
+    n({ type: Number })
+], ImageTooltip.prototype, "offset", void 0);
+ImageTooltip = __decorate([
+    e$1('image-tooltip')
+], ImageTooltip);
+
 let GetSheep = class GetSheep extends s {
     constructor() {
         super();
@@ -134,14 +197,13 @@ let GetSheep = class GetSheep extends s {
         return data;
     }
     render() {
-        // ${until(this.sheep, html`<span>Loading...</span>`)}
-        console.log('this.data 2', this.allData);
         return x `
     <table class="sheep-table">
         <tbody>
         ${this.sheepData.map((i) => x `
         <tr onclick="window.location.href='/sheep/${i.id}'">
             ${Object.keys(i).filter((key) => key !== 'img').map((key) => x `<td>${i[key]}</td>`)}
+            <image-tooltip><img src=${i.img} alt=${i.name} width="300"></image-tooltip>
         </tr>
         `)}
         </tbody>
