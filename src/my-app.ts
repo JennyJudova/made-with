@@ -4,9 +4,10 @@ import { customElement } from 'lit/decorators.js';
 import { Router } from '@vaadin/router';
 
 // Explicitly import page components
-import './pages/home-page.js';
-import './pages/about-page.js';
-import './pages/contact-page.js';
+import './pages/home-page';
+import './pages/about-page';
+import './pages/contact-page';
+import './pages/sheep-detail-page';
 
 @customElement('my-app')
 export class MyApp extends LitElement {
@@ -59,6 +60,10 @@ export class MyApp extends LitElement {
             {
                 path: '/contact',
                 component: 'contact-page',
+            },
+            {
+                path: '/sheep/:id',
+                component: 'sheep-detail-page',
             },
             {
                 path: '(.*)',

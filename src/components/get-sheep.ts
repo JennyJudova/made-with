@@ -1,6 +1,8 @@
 import {customElement, property} from 'lit/decorators.js';
 import { LitElement, html } from 'lit';
 import { styles } from './style/get-sheep.css.ts';
+import { Router } from '@vaadin/router';
+
 import './image-tooltip';
 
 @customElement('get-sheep')
@@ -19,9 +21,12 @@ constructor() {
   }
 
   get sheepData() {
-    console.log('this.allData', this.allData)
     let data =  this.allData.map((i: any) => ({ id: i.sheepId, name: i.name, sessionDate: i.sessionDate, img: i.img }));
     return data
+  }
+
+  private get baseUrl() {
+    return document.querySelector('base')?.href || '/';
   }
 
 render() {
@@ -29,7 +34,7 @@ render() {
     <table class="sheep-table">
         <tbody>
         ${this.sheepData.map((i: any) => html`
-        <tr onclick="window.location.href='/sheep/${i.id}'">
+        <tr @click=${() => Router.go(`${this.baseUrl}sheep/${i.id}`)}>
             ${Object.keys(i).filter((key) => key !== 'img').map((key) => html`<td>${i[key]}</td>`)}
             <image-tooltip><img src=${i.img} alt=${i.name} width="300"></image-tooltip>
         </tr>

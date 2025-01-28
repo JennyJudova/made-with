@@ -6,6 +6,7 @@ export declare class GetSheep extends LitElement {
     tableData: any;
     constructor();
     get sheepData(): any;
+    private get baseUrl();
     render(): import("lit-html").TemplateResult<1>;
 }
 declare global {
