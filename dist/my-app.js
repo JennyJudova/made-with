@@ -16,6 +16,7 @@ let MyApp = class MyApp extends s {
         this.router = new Router(outlet);
         // Get base URL from base tag if it exists, otherwise use '/'
         const baseUrl = ((_b = document.querySelector('base')) === null || _b === void 0 ? void 0 : _b.href) || '/';
+        console.log('baseUrl', baseUrl);
         // Configure router
         this.router.setRoutes([
             {
@@ -39,6 +40,7 @@ let MyApp = class MyApp extends s {
                 redirect: '/',
             }
         ]);
+        console.log('this.router', this.router);
         this.router.baseUrl = baseUrl;
     }
     render() {
@@ -49,6 +51,7 @@ let MyApp = class MyApp extends s {
                 <a href="${baseUrl}">Home</a>
                 <a href="${baseUrl}about">About</a>
                 <a href="${baseUrl}contact">Contact</a>
+                <a href="${baseUrl}sheep/2">Test sheep</a>
             </nav>
             <main id="outlet"></main>
         `;

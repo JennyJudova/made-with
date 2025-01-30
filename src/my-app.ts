@@ -46,7 +46,8 @@ export class MyApp extends LitElement {
         this.router = new Router(outlet);
         
         // Get base URL from base tag if it exists, otherwise use '/'
-        const baseUrl = document.querySelector('base')?.href || '/';        
+        const baseUrl = document.querySelector('base')?.href || '/';   
+        console.log('baseUrl', baseUrl)    
         // Configure router
         this.router.setRoutes([
             {
@@ -71,6 +72,8 @@ export class MyApp extends LitElement {
             }
         ]);
 
+        console.log('this.router', this.router)
+
         this.router.baseUrl = baseUrl;
     }
 
@@ -82,6 +85,7 @@ export class MyApp extends LitElement {
                 <a href="${baseUrl}">Home</a>
                 <a href="${baseUrl}about">About</a>
                 <a href="${baseUrl}contact">Contact</a>
+                <a href="${baseUrl}sheep/2">Test sheep</a>
             </nav>
             <main id="outlet"></main>
         `;
