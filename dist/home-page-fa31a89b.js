@@ -1,11 +1,5 @@
-import { i as i$1, _ as __decorate, s, x, e as e$1 } from './query-assigned-elements-868cdd0c.js';
-
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const i=(i,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,finisher(n){n.createProperty(e.key,i);}}:{kind:"field",key:Symbol(),placement:"own",descriptor:{},originalKey:e.key,initializer(){"function"==typeof e.initializer&&(this[e.key]=e.initializer.call(this));},finisher(n){n.createProperty(e.key,i);}},e=(i,e,n)=>{e.constructor.createProperty(n,i);};function n(n){return (t,o)=>void 0!==o?e(n,t,o):i(n,t)}
+import { i, _ as __decorate, s, x, e } from './query-assigned-elements-868cdd0c.js';
+import { n } from './property-0b2330ac.js';
 
 function toArray(objectOrArray) {
   objectOrArray = objectOrArray || [];
@@ -2953,7 +2947,7 @@ let MadeWithTitle = class MadeWithTitle extends s {
     `;
     }
 };
-MadeWithTitle.styles = i$1 `
+MadeWithTitle.styles = i `
     h1 {
       display: flex;
       justify-content: center;
@@ -2977,10 +2971,10 @@ __decorate([
     n({ type: String })
 ], MadeWithTitle.prototype, "sheep", void 0);
 MadeWithTitle = __decorate([
-    e$1('made-with-title')
+    e('made-with-title')
 ], MadeWithTitle);
 
-const styles = i$1 `
+const styles = i `
 
 .sheep-table {
   padding: 0 15% 10% 15%;
@@ -3091,7 +3085,7 @@ let ImageTooltip = class ImageTooltip extends s {
         return x `<slot></slot>`;
     }
 };
-ImageTooltip.styles = i$1 `
+ImageTooltip.styles = i `
     :host {
       display: flex;
       position: fixed;
@@ -3106,7 +3100,7 @@ __decorate([
     n({ type: Number })
 ], ImageTooltip.prototype, "offset", void 0);
 ImageTooltip = __decorate([
-    e$1('image-tooltip')
+    e('image-tooltip')
 ], ImageTooltip);
 
 let GetSheep = class GetSheep extends s {
@@ -3145,7 +3139,7 @@ __decorate([
     n({ type: (Array) })
 ], GetSheep.prototype, "tableData", void 0);
 GetSheep = __decorate([
-    e$1('get-sheep')
+    e('get-sheep')
 ], GetSheep);
 
 let HomePage = class HomePage extends s {
@@ -3195,8 +3189,8 @@ __decorate([
     n()
 ], HomePage.prototype, "sheepArr", void 0);
 HomePage = __decorate([
-    e$1('home-page')
+    e('home-page')
 ], HomePage);
 
-export { HomePage as H, Router as R, n };
-//# sourceMappingURL=home-page-98f5aadc.js.map
+export { HomePage as H, Router as R };
+//# sourceMappingURL=home-page-fa31a89b.js.map

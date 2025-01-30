@@ -6,7 +6,8 @@ export default {
         'my-app': 'src/my-app.ts',
         'pages/home-page': 'src/pages/home-page.ts',
         'pages/about-page': 'src/pages/about-page.ts',
-        'pages/contact-page': 'src/pages/contact-page.ts'
+        'pages/contact-page': 'src/pages/contact-page.ts',
+        'pages/sheep-detail-page': 'src/pages/sheep-detail-page.ts'
     },
     output: {
         dir: 'dist',
