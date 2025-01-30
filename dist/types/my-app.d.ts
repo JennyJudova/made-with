@@ -6,7 +6,8 @@ import './pages/sheep-detail-page';
 export declare class MyApp extends LitElement {
     static styles: import("lit").CSSResult;
     private router?;
-    firstUpdated(): void;
+    private getBaseUrl;
+    firstUpdated(): Promise<void>;
     render(): import("lit-html").TemplateResult<1>;
 }
 declare global {

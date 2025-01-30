@@ -132,8 +132,12 @@ SheepDetailPage = __decorate([
 ], SheepDetailPage);
 
 let MyApp = class MyApp extends s {
-    firstUpdated() {
-        var _a, _b;
+    getBaseUrl() {
+        const baseElement = document.querySelector('base');
+        return (baseElement === null || baseElement === void 0 ? void 0 : baseElement.getAttribute('href')) || '/';
+    }
+    async firstUpdated() {
+        var _a;
         const outlet = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector('#outlet');
         if (!outlet) {
             console.error('No outlet element found');
@@ -141,7 +145,8 @@ let MyApp = class MyApp extends s {
         }
         this.router = new Router(outlet);
         // Get base URL from base tag if it exists, otherwise use '/'
-        const baseUrl = ((_b = document.querySelector('base')) === null || _b === void 0 ? void 0 : _b.href) || '/';
+        const baseUrl = this.getBaseUrl();
+        this.router.baseUrl = baseUrl;
         // Configure router
         this.router.setRoutes([
             {
@@ -165,11 +170,18 @@ let MyApp = class MyApp extends s {
                 redirect: '/',
             }
         ]);
-        this.router.baseUrl = baseUrl;
+        // this.router.baseUrl = baseUrl;
+        // Wait for router to be ready
+        try {
+            await this.router.ready;
+            console.log('Router is ready');
+        }
+        catch (error) {
+            console.error('Router failed to initialize:', error);
+        }
     }
     render() {
-        var _a;
-        const baseUrl = ((_a = document.querySelector('base')) === null || _a === void 0 ? void 0 : _a.href) || '/';
+        const baseUrl = this.getBaseUrl();
         return x `
             <nav>
                 <a href="${baseUrl}">Home</a>
