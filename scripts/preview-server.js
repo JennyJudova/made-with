@@ -10,13 +10,13 @@ const app = express();
 const PORT = 8080;
 
 // Serve static files from dist directory
-app.use('/made-with', express.static(path.join(__dirname, '../dist')));
+app.use('/', express.static(path.join(__dirname, '../dist')));
 
 // Redirect root to /made-with/
 app.get('/', (req, res) => {
-    res.redirect('/made-with/');
+    res.redirect('/');
 });
 
 app.listen(PORT, () => {
-    console.log(`Preview server running at http://localhost:${PORT}/made-with/`);
+    console.log(`Preview server running at http://localhost:${PORT}/`);
 });
