@@ -7,7 +7,7 @@
         "prebuild": "echo 'Starting build process...' && rimraf dist",
         "build": "rollup -c && npm run copy-index",
         "copy-index": "node scripts/copy-index.js",
-        "preview": "http-server dist"
+        "preview": "node scripts/preview-server.js"
     },
     "dependencies": {
         "@vaadin/router": "^1.7.5",
@@ -20,6 +20,7 @@
         "@web/dev-server": "^0.1.35",
         "@web/dev-server-esbuild": "^0.3.3",
         "http-server": "^14.1.1",
+        "express": "^4.21.2",
         "rimraf": "^3.0.2",
         "rollup": "^2.79.1",
         "rollup-plugin-copy": "^3.4.0",

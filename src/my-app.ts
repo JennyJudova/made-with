@@ -36,7 +36,12 @@ export class MyApp extends LitElement {
 
     private router?: Router;
 
-    firstUpdated() {
+    private getBaseUrl(): string {
+        const baseElement = document.querySelector('base');
+        return baseElement?.getAttribute('href') || '/';
+    }
+
+    async firstUpdated() {
         const outlet = this.shadowRoot?.querySelector('#outlet');
         if (!outlet) {
             console.error('No outlet element found');
@@ -44,9 +49,11 @@ export class MyApp extends LitElement {
         }
 
         this.router = new Router(outlet);
-        
+
         // Get base URL from base tag if it exists, otherwise use '/'
-        const baseUrl = document.querySelector('base')?.href || '/';        
+        const baseUrl = this.getBaseUrl();
+
+        this.router.baseUrl = baseUrl;
         // Configure router
         this.router.setRoutes([
             {
@@ -71,11 +78,19 @@ export class MyApp extends LitElement {
             }
         ]);
 
-        this.router.baseUrl = baseUrl;
+        // this.router.baseUrl = baseUrl;
+
+        // Wait for router to be ready
+        try {
+            await this.router.ready;
+            console.log('Router is ready');
+        } catch (error) {
+            console.error('Router failed to initialize:', error);
+        }
     }
 
     render() {
-        const baseUrl = document.querySelector('base')?.href || '/';
+        const baseUrl = this.getBaseUrl();
         
         return html`
             <nav>
